@@ -1,6 +1,7 @@
 var request = require("request")
   , parseString = require("xml2js").parseString
   , q = require('q')
+  , express = require("express")
   , urls =  {
       fb: "https://api.facebook.com/restserver.php?method=links.getStats&urls=%urls",
       contest: "http://contest.theamazingsociety.com/_fa/contest/%contestKey",
@@ -81,9 +82,13 @@ function summarize(result) {
   return deferred.promise;
 }
 
+app.get('/', function(req, res) {
+  res.send('Hello World!');
+});
 
 var contestKey = 'ahFlfmFtYXppbmctY29udGVzdHIUCxIHQ29udGVzdCIHbjlkOW1rYQw';
 
+/*
 getContest(contestKey)
   .then(getEntries)
   .then(getLinkDataFromFacebook)
@@ -93,3 +98,4 @@ getContest(contestKey)
     console.log(result);
   });
 
+*/
