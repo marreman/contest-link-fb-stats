@@ -2,7 +2,7 @@
   "name": "facebook-link-stats",
   "version": "0.0.1",
   "description": "",
-  "main": "check.js",
+  "main": "app.js",
   "dependencies": {
     "q": "~1.0.1",
     "request": "~2.36.0",

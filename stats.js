@@ -1,7 +1,6 @@
 var request = require("request")
   , parseString = require("xml2js").parseString
   , q = require('q')
-  , express = require("express")
   , urls =  {
       fb: "https://api.facebook.com/restserver.php?method=links.getStats&urls=%urls",
       contest: "http://contest.theamazingsociety.com/_fa/contest/%contestKey",
@@ -81,31 +80,12 @@ function summarize(result) {
 
   return deferred.promise;
 }
-var logfmt = require("logfmt");
-var app = express();
 
-app.use(logfmt.requestLogger());
-
-app.get('/', function(req, res) {
-  res.send('Hello World!');
-});
-
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-
-
-var contestKey = 'ahFlfmFtYXppbmctY29udGVzdHIUCxIHQ29udGVzdCIHbjlkOW1rYQw';
-
-/*
-getContest(contestKey)
-  .then(getEntries)
-  .then(getLinkDataFromFacebook)
-  .then(xml2json)
-  .then(summarize)
-  .then(function (result) {
-    console.log(result);
-  });
-
-*/
+module.exports = function (contestKey, callback) {
+  getContest(contestKey)
+    .then(getEntries)
+    .then(getLinkDataFromFacebook)
+    .then(xml2json)
+    .then(summarize)
+    .then(callback);
+}
