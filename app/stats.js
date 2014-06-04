@@ -14,6 +14,10 @@ function assert(expression) {
   }
 }
 
+function copy(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
 
 function getContest(contestKey) {
   var deferred = q.defer();
@@ -77,16 +81,25 @@ function xml2json(xml) {
 
 function summarize(result) {
   var stats = result.links_getStats_response.link_stat
-    , result = { likes: 0, comments: 0, shares: 0, clicks: 0, total: 0 }
+    , partialResultTpl = { likes: 0, comments: 0, shares: 0, clicks: 0, total: 0 }
+    , result = { contest: copy(partialResultTpl), entries: copy(partialResultTpl) }
     , deferred = q.defer();
+  
+  function getDataFromStat() {
+    var _this = this
+      , stats = Array.prototype.slice.call(arguments);
 
-  stats.forEach(function (stat) {
-    result.likes += parseInt(stat.like_count.pop(), 10);
-    result.comments += parseInt(stat.comment_count.pop(), 10);
-    result.shares += parseInt(stat.share_count.pop(), 10);
-    result.clicks += parseInt(stat.click_count.pop(), 10);
-    result.total += parseInt(stat.total_count.pop(), 10);
-  });
+    stats.forEach(function (stat) {
+      _this.likes += parseInt(stat.like_count.pop(), 10);
+      _this.comments += parseInt(stat.comment_count.pop(), 10);
+      _this.shares += parseInt(stat.share_count.pop(), 10);
+      _this.clicks += parseInt(stat.click_count.pop(), 10);
+      _this.total += parseInt(stat.total_count.pop(), 10);
+    });
+  }
+  
+  getDataFromStat.apply(result.contest, [stats.pop(), stats.pop()]);
+  getDataFromStat.apply(result.entries, stats);
 
   deferred.resolve(result);
 

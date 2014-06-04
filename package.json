@@ -14,14 +14,15 @@
     "react": "^0.10.0",
     "jquery": "^2.1.1",
     "browserify": "^4.1.8",
-    "reactify": "^0.13.1"
+    "reactify": "^0.13.1",
+    "events": "^1.0.1"
   },
   "devDependencies": {
     "watchify": "^0.10.2"
   },
   "scripts": {
     "start": "node app/web.js",
-    "dev": "watchify app/ui/scripts.js -d -t reactify -o app/public/bundle.js",
+    "develop": "watchify app/ui/app.js -d -t reactify -o app/public/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "browserify app/ui/scripts.js -t reactify -o app/public/bundle.js"
   },
