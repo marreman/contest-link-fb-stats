@@ -28,12 +28,4 @@ var logfmt = require("logfmt")
   });
   
   app.listen(port);
-  
 }());
-
-
-
-var contestKey = 'ahFlfmFtYXppbmctY29udGVzdHIUCxIHQ29udGVzdCIHbjlkOW1rYQw';
-
-
-

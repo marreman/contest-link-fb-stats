@@ -77,13 +77,14 @@ function xml2json(xml) {
 
 function summarize(result) {
   var stats = result.links_getStats_response.link_stat
-    , result = { likes: 0, comments: 0, shares: 0, total: 0 }
+    , result = { likes: 0, comments: 0, shares: 0, clicks: 0, total: 0 }
     , deferred = q.defer();
 
   stats.forEach(function (stat) {
     result.likes += parseInt(stat.like_count.pop(), 10);
     result.comments += parseInt(stat.comment_count.pop(), 10);
     result.shares += parseInt(stat.share_count.pop(), 10);
+    result.clicks += parseInt(stat.click_count.pop(), 10);
     result.total += parseInt(stat.total_count.pop(), 10);
   });
 
@@ -93,7 +94,6 @@ function summarize(result) {
 }
 
 module.exports = function (contestUrl, callback) {
-  //http://contest.theamazingsociety.com/n9d9mka?tab_ref=122854408319/tabs/app_164358017051995
   var partialContestUrl = contestUrl.match(/(.*)\?/)[1],
       contestKey = contestUrl.match(/com\/(.*)\?/)[1];
   
@@ -111,4 +111,4 @@ module.exports = function (contestUrl, callback) {
     .then(xml2json)
     .then(summarize)
     .then(callback);
-}
+};

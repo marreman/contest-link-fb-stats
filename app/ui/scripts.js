@@ -13,6 +13,7 @@ function renderResult(stats) {
     <Stats likes={stats.likes}
            comments={stats.comments}
            shares={stats.shares}
+           clicks={stats.clicks}
            total={stats.total} />,
     document.getElementById('app')
   );
@@ -21,7 +22,7 @@ function renderResult(stats) {
 var Stats = React.createClass({
   render: function () {
       var _this = this;
-      var rows = ['likes', 'comments', 'shares', 'total'].map(function (key) {
+      var rows = ['likes', 'comments', 'shares', 'clicks', 'total'].map(function (key) {
         return (
           <tr>
             <td><strong>{key}</strong></td>
@@ -64,7 +65,7 @@ var Form = React.createClass({
   
   getInitialState: function () {
     return {
-      link: 'ahFlfmFtYXppbmctY29udGVzdHIUCxIHQ29udGVzdCIHbjlkOW1rYQw'
+      link: ''
     }
   },
   
