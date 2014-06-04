@@ -24,7 +24,7 @@
     "start": "node app/web.js",
     "develop": "watchify app/ui/app.js -d -t reactify -o app/public/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "browserify app/ui/scripts.js -t reactify -o app/public/bundle.js"
+    "postinstall": "browserify app/ui/app.js -t reactify -o app/public/bundle.js"
   },
   "repository": {
     "type": "git",
