@@ -1,0 +1,27 @@
+#app {
+  width: 100%;
+  margin: 180px auto 0;
+  text-align: center;
+}
+
+.fs-result-table {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.fs-text-right {
+  text-align: right;
+}
+
+.fs-form {
+  text-align: center;
+}
+
+.fs-input {
+  width: 500px;
+}
+
+h1 {
+  font-weight: 100;
+}

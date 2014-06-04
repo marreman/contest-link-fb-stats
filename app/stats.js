@@ -8,6 +8,12 @@ var request = require("request")
       entry: "http://contest.theamazingsociety.com/%contestKey/contributions/%entryKey"
   };
 
+function assert(expression) {
+  if (!expression) {
+    throw new Error('Assertion failed.');
+  }
+}
+
 
 function getContest(contestKey) {
   var deferred = q.defer();
@@ -23,14 +29,19 @@ function getContest(contestKey) {
 
 function getEntries(contest) {
   var deferred = q.defer();
+  
+  assert(contest.hasOwnProperty('key'));
 
   console.log('getEntries', contest.key);
 
   request(urls.getEntries.replace('%contestKey', contest.key), function(error, response, body) {
     var url = urls.entry.replace('%contestKey', contest.key_name)
+      , entries = JSON.parse(body)
       , result;
+    
+    assert(entries instanceof Array, 'entries is not an array');
 
-    result = JSON.parse(body).map(function (entry) {
+    result = entries.map(function (entry) {
       return url.replace('%entryKey', entry.key_name);
     });
 
@@ -81,9 +92,21 @@ function summarize(result) {
   return deferred.promise;
 }
 
-module.exports = function (contestKey, callback) {
+module.exports = function (contestUrl, callback) {
+  //http://contest.theamazingsociety.com/n9d9mka?tab_ref=122854408319/tabs/app_164358017051995
+  var partialContestUrl = contestUrl.match(/(.*)\?/)[1],
+      contestKey = contestUrl.match(/com\/(.*)\?/)[1];
+  
   getContest(contestKey)
     .then(getEntries)
+    .then(function (entryUrls) {
+      var deferred = q.defer();
+      
+      entryUrls.push(contestUrl, partialContestUrl);
+      deferred.resolve(entryUrls);
+
+      return deferred.promise;
+    })
     .then(getLinkDataFromFacebook)
     .then(xml2json)
     .then(summarize)

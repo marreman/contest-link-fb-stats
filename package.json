@@ -2,15 +2,23 @@
   "name": "facebook-link-stats",
   "version": "0.0.1",
   "description": "",
-  "main": "app.js",
+  "main": "app/web.js",
   "dependencies": {
     "q": "~1.0.1",
     "request": "~2.36.0",
     "xml2js": "~0.4.4",
     "logfmt": "^1.1.2",
-    "express": "^4.4.1"
+    "express": "^4.4.1",
+    "ejs": "^1.0.0",
+    "envify": "^1.2.1",
+    "react": "^0.10.0",
+    "jquery": "^2.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^4.1.8",
+    "reactify": "^0.13.1",
+    "watchify": "^0.10.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
