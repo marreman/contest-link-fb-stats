@@ -12,15 +12,18 @@
     "ejs": "^1.0.0",
     "envify": "^1.2.1",
     "react": "^0.10.0",
-    "jquery": "^2.1.1"
+    "jquery": "^2.1.1",
+    "browserify": "^4.1.8",
+    "reactify": "^0.13.1"
   },
   "devDependencies": {
-    "browserify": "^4.1.8",
-    "reactify": "^0.13.1",
     "watchify": "^0.10.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app/web.js",
+    "dev": "watchify app/ui/scripts.js -d -t reactify -o app/public/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "browserify app/ui/scripts.js -t reactify -o app/public/bundle.js"
   },
   "repository": {
     "type": "git",
