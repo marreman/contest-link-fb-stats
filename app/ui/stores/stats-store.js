@@ -22,7 +22,7 @@ var api = merge(EventEmitter.prototype, {
   addChangeListener: function (callback) {
     this.on(CHANGE_EVENT, callback);
   },
-                          
+
   removeChangeListener: function (callback) {
     this.off(CHANGE_EVENT, callback);
   }
@@ -47,6 +47,7 @@ Dispatcher.register(function (payload) {
       break;
     case Constants.STATS_RESET:
       _stats = {};
+      api.emit(CHANGE_EVENT);
       break;
   }
   

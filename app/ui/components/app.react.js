@@ -29,18 +29,7 @@ var StatsApp = React.createClass({
     if (AppStore.isLoading) {
       view = <Loader />;
     } else if (StatsStore.hasStats()) {
-      stats = this.state.stats;
-      view = (
-        <div className="pure-g">
-          <div className="pure-u-1-2">
-            <Stats label="Contest" data={stats.contest} /> 
-          </div>
-          <div className="pure-u-1-2">
-            <Stats label="Entries" data={stats.entries} /> 
-          </div>
-          <button onClick={this._onReset} className="fs-btn pure-button pure-button-primary">Enter new link</button>
-        </div>
-      );
+      view = <Stats data={this.state.stats} />;
     } else {
       view = <Form />
     }
