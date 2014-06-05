@@ -26,6 +26,7 @@ var StatsApp = React.createClass({
   render: function () {
     var view
       , stats;
+    
     if (AppStore.isLoading) {
       view = <Loader />;
     } else if (StatsStore.hasStats()) {
@@ -47,11 +48,6 @@ var StatsApp = React.createClass({
     });
   },
   
-  _onReset: function () {
-    Actions.resetStats(); 
-    this._onChange();
-  },
-        
   _onChange: function () {
     this.setState({
       stats: StatsStore.getStats()
