@@ -8,20 +8,20 @@ var React = require('react')
 function totalStats(contest, entries) {
   var total = {}
     , keys = Object.keys(contest);
-  
+
   keys.forEach(function (key) {
     total[key] = contest[key] + entries[key];
   });
-  
+
   return total;
 }
 
 var Stats = React.createClass({
-  
+
   render: function () {
     var stats = this.props.data
       , total = totalStats(stats.contest, stats.entries);
-    
+
     return (
       <div className="app">
         <div className="pure-g">
@@ -39,11 +39,11 @@ var Stats = React.createClass({
       </div>
     );
   },
-  
+
   _onReset: function () {
     Actions.resetStats(); 
   }
-  
+
 });
 
 module.exports = Stats;

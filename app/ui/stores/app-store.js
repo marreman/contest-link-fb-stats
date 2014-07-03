@@ -13,7 +13,7 @@ var api = merge(EventEmitter.prototype, {
 });
 
 Dispatcher.register(function (payload) {
-  
+
   switch (payload.actionType) {
     case Constants.STATS_FETCH:
       api.isLoading = true;
@@ -24,7 +24,7 @@ Dispatcher.register(function (payload) {
       api.emit(LOADING_EVENT);
       break;
   }
-  
+
 });
 
 module.exports = api;
